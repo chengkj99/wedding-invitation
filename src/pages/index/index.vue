@@ -33,6 +33,8 @@ export default {
     }
   },
   onLoad () {
+    console.log('$$onLoad')
+
     this.globalData.innerAudioContext.onEnded(this.onEnded)
     this.globalData.innerAudioContext.onPlay(this.onPlay)
     this.globalData.innerAudioContext.onPause(this.onPause)
@@ -40,6 +42,8 @@ export default {
     const db = wx.cloud.database()
     const common = db.collection('common')
     common.get().then(res => {
+      console.log('婚礼邀请函 common：', res)
+
       this.background = res.data[0].background
       this.info = res.data[0].info
     })
@@ -76,6 +80,7 @@ export default {
       const db = wx.cloud.database()
       const banner = db.collection('banner')
       banner.get().then(res => {
+        console.log('婚礼邀请函 banner：', res)
         let list = []
         let animations = [
           'fadeInLeft',
@@ -100,7 +105,10 @@ export default {
       const that = this
       const db = wx.cloud.database()
       const music = db.collection('music')
+      console.log('music', music)
       music.get().then(res => {
+        console.log('res##', res)
+
         that.globalData.innerAudioContext.src = res.data[0].musicUrl
         that.audioCtx.play()
         that.getList()

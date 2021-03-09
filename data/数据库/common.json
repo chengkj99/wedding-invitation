@@ -1,22 +1,24 @@
 {
   "_id": "67d7368d-b62d-4ed0-8bb5-b7100fb4746f",
-  "heNumber": "18000000000",
-  "sheNumber": "18100000000",
-  "poster": "cloud://wedding-0gm97h3j6438a979.7765-wedding-0gm97h3j6438a979-1304438610/photos/1-201211163J6.jpg",
-  "background": "cloud://wedding-0gm97h3j6438a979.7765-wedding-0gm97h3j6438a979-1304438610/photos/backS.jpg",
-  "videoUrl": "cloud://wedding-0gm97h3j6438a979.7765-wedding-0gm97h3j6438a979-1304438610/video/yanhua.mp4",
+  "heNumber": "18519395286",
+  "sheNumber": "18500209289",
+  "poster": "cloud://ckj-wgw-wedding-1gzc32fv0fb3d8bc.636b-ckj-wgw-wedding-1gzc32fv0fb3d8bc-1305168144/photos/1-201211163J6.jpg",
+  "background": "cloud://ckj-wgw-wedding-1gzc32fv0fb3d8bc.636b-ckj-wgw-wedding-1gzc32fv0fb3d8bc-1305168144/photos/backS.png",
+  "videoUrl": "cloud://ckj-wgw-wedding-1gzc32fv0fb3d8bc.636b-ckj-wgw-wedding-1gzc32fv0fb3d8bc-1305168144/video/yanhua.mp4",
   "adminOpenId": [
     "ozLMf5J_dTcrqIro4MmFvng_KxbM"
   ],
   "location": {
-    "longitude": "119.192471",
-    "latitude": "34.601541"
+    "longitude": "118.306587",
+    "latitude": "34.629829"
   },
   "info": {
-    "name": "Mr.Z & Miss.Q",
-    "date": "谨定于 2019年10月01日 星期二",
-    "time": "农历 九月初三 中午十一点半 举办婚礼",
-    "hotel": "席设：顺庭龙庄中一厅",
-    "detail": "地址：成都市新都区临河街与荣德路交叉口"
+    "name": "Mr.Cheng & Miss.Wang",
+    "date": "谨定于 2021 年 5 月 2 日 星期日",
+    "time": "农历 三月二十一 中午十点十二分 举办婚礼",
+    "hotel": "席设：维也纳酒店贵宾厅",
+    "detail": "地址：山东郯城经济开发区维也纳酒店"
   }
 }
+
+
