@@ -27,11 +27,6 @@
             <div class="animate-ele animated fadeInRight" style="left: 0; animation-duration: 1.5s; animation-delay: 1.8s">
               <div class="info">
                 <div class="content">
-                  <!-- <h6>Mr.Z & Miss.Q</h6>
-                  <p>谨定于 2019年10月01日 （星期二）中午11:30</p>
-                  <p>农历 九月初三 中午十一点半 举办婚礼</p>
-                  <p>席设：顺庭龙庄中一厅</p>
-                  <p>地址：成都市新都区临河街与荣德路交叉口</p> -->
                   <h6>{{info.name}}</h6>
                   <p>{{info.date}}</p>
                   <p>{{info.time}}</p>

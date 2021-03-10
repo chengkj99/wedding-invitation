@@ -22,10 +22,10 @@
       <p class="place-end"></p>
     </scroll-view>
     <div class="bottom">
-      <button class="left" lang="zh_CN" open-type="getUserInfo" @getuserinfo="toMessage">
+      <button class="left say-button" lang="zh_CN" open-type="getUserInfo" @getuserinfo="toMessage">
         说点啥吧
       </button>
-      <button class="right" open-type="getUserInfo" @getuserinfo="toForm">我要出席</button>
+      <!-- <button class="right" open-type="getUserInfo" @getuserinfo="toForm">我要出席</button> -->
     </div>
     <div class="dialog" v-show="isOpen">
       <textarea
@@ -38,17 +38,20 @@
         v-model="desc"
       />
       <div class="btn">
-        <button class="left" @tap="sendMessage">发送留言</button>
         <button class="right" @tap="cancel">取消</button>
+        <button class="left" @tap="sendMessage">发送留言</button>
       </div>
     </div>
-    <div class="video-dialog" @tap="toVideo" v-if="url !== '' && url !== undefined">
+
+    <!-- <div class="video-dialog" @tap="toVideo" v-if="url !== '' && url !== undefined">
       <image src="../../static/images/video1.png" />
-    </div>
-    <div class="form-dialog" @tap="lookList">
+    </div> -->
+
+    <!-- <div class="form-dialog" @tap="lookList">
       <image src="../../static/images/form.png" />
-    </div>
-    <div class="video" v-if="isVideo">
+    </div> -->
+
+    <!-- <div class="video" v-if="isVideo">
       <h-video @closeVideo="closeVideo" :url="url" :poster="poster"></h-video>
     </div>
     <div class="form" ref="form" v-show="isForm">
@@ -56,7 +59,7 @@
     </div>
     <div class="form-list" v-show="isFormlist">
       <h-formlist @closeFormlist="closeFormlist" :formList="formList"></h-formlist>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -116,6 +119,7 @@ export default {
     },
     toMessage(e) {
       const that = this
+      that.isOpen = true
       if (e.target.errMsg === 'getUserInfo:ok') {
         wx.getUserInfo({
           success: function (res) {
@@ -439,6 +443,7 @@ export default {
         align-items: flex-start;
         width: 480rpx;
         margin-left: 20rpx;
+        background-color: #fff;
 
         .top {
           height: 40rpx;
@@ -459,6 +464,7 @@ export default {
             line-height: 50rpx;
             color: #999;
             font-size: 24rpx;
+            white-space: nowrap;
           }
         }
 
@@ -507,6 +513,9 @@ export default {
 
     .right {
       margin: 0;
+    }
+    .say-button {
+      width: 360rpx;
     }
   }
 

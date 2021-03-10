@@ -2,16 +2,19 @@
     <div class="photo">
       <image class="bg-image" :src="background"/>
       <h-swiper :list="list" :isGif="isGif"></h-swiper>
+      <!-- <IndexSwiper :list="list" :info="{}"></IndexSwiper> -->
     </div>
 </template>
 
 <script>
 import HSwiper from 'components/swiper'
+// import IndexSwiper from 'components/indexSwiper'
 // import imgData from 'common/json/imgData.json'
 export default {
   name: 'Photo',
   components: {
     HSwiper
+    // IndexSwiper
   },
   onLoad () {
     this.getList()
@@ -37,13 +40,14 @@ export default {
     getList () {
       const that = this
       const db = wx.cloud.database()
-      const banner = db.collection('indexBanner')
+      const banner = db.collection('banner')
       banner.get().then(res => {
+        const bannerList = res.data[0].bannerList
         let list = []
-        for (let i = 0; i < res.data[0].indexBanner.length; i++) {
+        for (let i = 0; i < bannerList.length; i++) {
           let show = i === 0
           list.push({
-            url: res.data[0].indexBanner[i],
+            url: bannerList[i],
             show: show
           })
         }

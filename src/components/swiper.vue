@@ -7,11 +7,12 @@
       @change="change"
       @animationfinish="animationfinish"
       :duration=250
+      :interval=3880
     >
     <block v-for="(item, index) in list" :key="index">
       <swiper-item class="item">
         <div class="animate-ele-warp" v-if="item.show">
-          <div class="animate-ele animated" :class="[item.class]" style="top: 0; left: 0; animation-delay: 0.2s;">
+          <div class="animate-ele animated" :class="[item.class]" style="top: 0; left: 0; animation-delay: 0.1s;">
             <image mode="aspectFill" lazy-load :src="item.url" class="animate-img slide-image"/>
           </div>
         </div>

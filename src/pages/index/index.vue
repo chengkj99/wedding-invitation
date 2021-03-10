@@ -78,22 +78,22 @@ export default {
     getList () {
       const that = this
       const db = wx.cloud.database()
-      const banner = db.collection('banner')
+      const banner = db.collection('indexBanner')
       banner.get().then(res => {
         console.log('婚礼邀请函 banner：', res)
         let list = []
         let animations = [
-          'fadeInLeft',
+          'flip',
+          'jackInTheBox',
+          'rollIn',
           'slideInDown',
           'rotateInDownRight',
-          'rollIn',
-          'jackInTheBox',
-          'flip'
+          'fadeInLeft'
         ]
-        for (let i = 0; i < res.data[0].bannerList.length; i++) {
+        for (let i = 0; i < res.data[0].indexBanner.length; i++) {
           let show = i === 0
           list.push({
-            url: res.data[0].bannerList[i],
+            url: res.data[0].indexBanner[i],
             show: show,
             class: animations[i]
           })
