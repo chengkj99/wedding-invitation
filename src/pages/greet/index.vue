@@ -29,6 +29,9 @@ export default {
       userInfo: ''
     }
   },
+  onLoad() {
+    this.globalData.showShareMenu()
+  },
   onShow () {
     const that = this
     that.getUserList()

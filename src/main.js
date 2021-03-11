@@ -2,6 +2,7 @@ import './animate.wxss'
 // import './index.css'
 import Vue from 'vue'
 import App from './App'
+import share from './share'
 
 Vue.config.productionTip = false
 App.mpType = 'app'
@@ -65,6 +66,14 @@ app.globalData.animations = [
   `slideInUp`,
   `heartBeat`
 ]
+app.globalData.showShareMenu = function () {
+  wx.showShareMenu({
+    withShareTicket: true,
+    menus: ['shareAppMessage', 'shareTimeline']
+  })
+}
+Vue.use(share)
+
 const db = wx.cloud.database()
 const music = db.collection('music')
 music.get().then(res => {

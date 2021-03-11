@@ -17,6 +17,7 @@ export default {
     // IndexSwiper
   },
   onLoad () {
+    this.globalData.showShareMenu()
     this.getList()
     const db = wx.cloud.database()
     const common = db.collection('common')

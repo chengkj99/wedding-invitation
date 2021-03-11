@@ -92,6 +92,7 @@ export default {
     }
   },
   onLoad() {
+    this.globalData.showShareMenu()
     this.getVideoUrl()
   },
   onShow() {

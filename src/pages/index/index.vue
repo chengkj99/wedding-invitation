@@ -23,7 +23,7 @@ export default {
   components: {
     IndexSwiper
   },
-  data () {
+  data() {
     return {
       isPlay: false,
       list: [],
@@ -32,9 +32,8 @@ export default {
       info: {}
     }
   },
-  onLoad () {
-    console.log('$$onLoad')
-
+  onLoad() {
+    this.globalData.showShareMenu()
     this.globalData.innerAudioContext.onEnded(this.onEnded)
     this.globalData.innerAudioContext.onPlay(this.onPlay)
     this.globalData.innerAudioContext.onPause(this.onPause)
@@ -42,31 +41,29 @@ export default {
     const db = wx.cloud.database()
     const common = db.collection('common')
     common.get().then(res => {
-      console.log('婚礼邀请函 common：', res)
-
       this.background = res.data[0].background
       this.info = res.data[0].info
     })
   },
-  onShow () {
+  onShow() {
     this.audioCtx = this.globalData.innerAudioContext
     this.isPlay = !this.audioCtx.paused
   },
   methods: {
-    onPlay () {
+    onPlay() {
       this.isPlay = true
     },
-    onPause () {
+    onPause() {
       this.isPlay = false
     },
-    onEnded () {
+    onEnded() {
       if (this.globalData.index >= this.globalData.musics.length) {
         this.globalData.index = 0
       }
       this.globalData.innerAudioContext.src = this.globalData.musics[this.globalData.index].musicUrl
       this.globalData.index += 1
     },
-    audioPlay () {
+    audioPlay() {
       if (this.audioCtx.paused) {
         this.audioCtx.play()
         tools.showToast('背景音乐已开启~')
@@ -75,12 +72,11 @@ export default {
         tools.showToast('您已暂停音乐播放~')
       }
     },
-    getList () {
+    getList() {
       const that = this
       const db = wx.cloud.database()
       const banner = db.collection('indexBanner')
       banner.get().then(res => {
-        console.log('婚礼邀请函 banner：', res)
         let list = []
         let animations = [
           'flip',
@@ -101,7 +97,7 @@ export default {
         that.list = list
       })
     },
-    getMusicUrl () {
+    getMusicUrl() {
       const that = this
       const db = wx.cloud.database()
       const music = db.collection('music')
@@ -114,17 +110,12 @@ export default {
         that.getList()
       })
     }
-  },
-
-  onShareAppMessage: function (res) {
-    return {
-      path: '/pages/index/main'
-    }
   }
 }
 </script>
 
 <style scoped lang="stylus">
+
 @-webkit-keyframes musicRotate
   from
     -webkit-transformb rotate(0deg)
@@ -147,48 +138,68 @@ export default {
     -webkit-transform scale(.9) translate(5px, 5px)
   100%
     -webkit-transform scale(1) translate(0, 0)
-.index
-  height 100%
-  position relative
-  .img
-    width 100%
-    height 100%
-  .bg-swiper
-    width 100%
-    height 100%
-  .inv
-    position absolute
-    top 20rpx
-    left 89rpx
-    width 572rpx
-    height 69rpx
-    z-index 9
-  .bg_music
-    position fixed
-    right 10rpx
-    top 100rpx
-    width 100rpx
-    z-index 99
-    display flex
-    justify-content flex-start
-    align-items flex-start
-    .musicImg
-      width 60rpx
-      height 60rpx
-    .music_icon
-      animation musicRotate 3s linear infinite
-    .music_play
-      width 28rpx
-      height 60rpx
-      margin-left -10rpx
-      transform-origin top
-      -webkit-transform rotate(20deg)
-    .playImg
-      animation musicStop 1s linear forwards
-    .pauseImg
-      animation musicStart 1s linear forwards
-  #myAudio
-    display none
 
+.index {
+  height: 100%;
+  position: relative;
 
+  .img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .bg-swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .inv {
+    position: absolute;
+    top: 20rpx;
+    left: 89rpx;
+    width: 572rpx;
+    height: 69rpx;
+    z-index: 9;
+  }
+
+  .bg_music {
+    position: fixed;
+    right: 10rpx;
+    top: 100rpx;
+    width: 100rpx;
+    z-index: 99;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .musicImg {
+      width: 60rpx;
+      height: 60rpx;
+    }
+
+    .music_icon {
+      animation: musicRotate 3s linear infinite;
+    }
+
+    .music_play {
+      width: 28rpx;
+      height: 60rpx;
+      margin-left: -10rpx;
+      transform-origin: top;
+      -webkit-transform: rotate(20deg);
+    }
+
+    .playImg {
+      animation: musicStop 1s linear forwards;
+    }
+
+    .pauseImg {
+      animation: musicStart 1s linear forwards;
+    }
+  }
+
+  #myAudio {
+    display: none;
+  }
+}
 </style>
