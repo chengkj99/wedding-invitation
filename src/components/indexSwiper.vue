@@ -25,14 +25,16 @@
               <image class="animate-img" src="../../static/images/loveistrue.png" style="bottom: 80rpx; left: 12rpx; width: 687rpx; height: 17rpx;" />
             </div>
             <div class="animate-ele animated fadeInRight" style="left: 0; animation-duration: 1.5s; animation-delay: 1.8s">
-              <div class="info">
-                <div class="content">
-                  <h6>{{info.name}}</h6>
-                  <p>{{info.date}}</p>
-                  <p>{{info.time}}</p>
-                  <p>{{info.hotel}}</p>
-                  <p>{{info.detail}}</p>
-                  <image src="../../static/images/we.png" class="img_footer"/>
+              <div class="info-wrapper">
+                <div class="info">
+                  <div class="content">
+                    <h6>{{info.name}}</h6>
+                    <p>{{info.date}}</p>
+                    <p>{{info.time}}</p>
+                    <p>{{info.hotel}}</p>
+                    <p>{{info.detail}}</p>
+                    <image src="../../static/images/we.png" class="img_footer"/>
+                  </div>
                 </div>
               </div>
             </div>
@@ -166,37 +168,42 @@ export default {
         width 100%
         height 100%
         display block
-  .info
-    width 630rpx
-    background rgba(255, 255, 255, 0.75)
-    z-index 9
-    position absolute
-    bottom 120rpx
-    left 50rpx
-    padding 10rpx
-    animation infoAnimation 12s linear infinite
-    .content
-      width 626rpx
-      border 1rpx solid #000
-      display flex
-      flex-direction column
-      justify-content flex-start
-      align-items center
-      position relative
-      padding-bottom 30rpx
-      h1
-        font-size 50rpx
-        height 100rpx
-        line-height 100rpx
-      p
-        font-size 24rpx
-        height 60rpx
-        line-height 60rpx
-      .img_footer
-        position absolute
-        bottom 10rpx
-        left 53rpx
-        z-index 99
-        height 14rpx
-        width 520rpx
+  .info-wrapper
+    width 100%
+    display flex
+    flex-flow row nowrap
+    justify-content center
+    .info
+      width 650rpx
+      background rgba(255, 255, 255, 0.75)
+      z-index 9
+      position absolute
+      bottom 120rpx
+      padding 10rpx
+      animation infoAnimation 12s linear infinite
+      .content
+        padding 10rpx
+        width 626rpx
+        border 1rpx solid #000
+        display flex
+        flex-direction column
+        justify-content flex-start
+        align-items center
+        position relative
+        padding-bottom 30rpx
+        h1
+          font-size 50rpx
+          height 100rpx
+          line-height 100rpx
+        p
+          font-size 24rpx
+          height 60rpx
+          line-height 60rpx
+        .img_footer
+          position absolute
+          bottom 10rpx
+          left 53rpx
+          z-index 99
+          height 14rpx
+          width 520rpx
 </style>
