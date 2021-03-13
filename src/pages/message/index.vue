@@ -15,7 +15,7 @@
           <image
             src="../../static/images/delete1.png"
             class="delete_icon"
-            v-if="item._openid === openId || isAdmin"
+            v-if="isAdmin"
           />
         </div>
       </div>
