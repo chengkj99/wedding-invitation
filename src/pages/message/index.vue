@@ -6,24 +6,24 @@
         <image class="left" :src="item.url" />
         <div class="right">
           <div class="top">
-            <div class="delete" @tap="deleteMessage(item)">
-              <image
-                src="../../static/images/close.png"
-                class="delete_icon"
-                v-if="item._openid === openId || isAdmin"
-              />
-            </div>
             <span class="top-l">{{ item.name }}</span>
             <span class="top-r">{{ item.time }}</span>
           </div>
           <p class="con">{{ item.desc }}</p>
+        </div>
+        <div class="delete" @tap="deleteMessage(item)">
+          <image
+            src="../../static/images/delete1.png"
+            class="delete_icon"
+            v-if="item._openid === openId || isAdmin"
+          />
         </div>
       </div>
       <p class="place-end"></p>
     </scroll-view>
     <div class="bottom">
       <button class="left say-button" lang="zh_CN" open-type="getUserInfo" @getuserinfo="toMessage">
-        说点啥吧
+        说点祝福吧~~
       </button>
       <!-- <button class="right" open-type="getUserInfo" @getuserinfo="toForm">我要出席</button> -->
     </div>
@@ -32,14 +32,14 @@
         focus="true"
         maxlength="80"
         class="desc"
-        placeholder="在这里输入您想要说的话"
+        placeholder="在这里输入您想要说的话~"
         name="textarea"
         placeholder-style="color:#ccc;"
         v-model="desc"
       />
       <div class="btn">
         <button class="right" @tap="cancel">取消</button>
-        <button class="left" @tap="sendMessage">发送留言</button>
+        <button class="left" @tap="sendMessage" :loading="sendMsgLoading">发送留言</button>
       </div>
     </div>
 
@@ -88,7 +88,8 @@ export default {
       formList: [],
       url: '',
       poster: '',
-      adminsIds: []
+      adminsIds: [],
+      sendMsgLoading: false
     }
   },
   onLoad() {
@@ -104,7 +105,7 @@ export default {
   },
   computed: {
     isAdmin: function () {
-      return this.adminsIds.indexOf(this.openId) !== -1
+      return this.adminsIds.indexOf(this.openId) > -1
     }
   },
   methods: {
@@ -120,7 +121,6 @@ export default {
     },
     toMessage(e) {
       const that = this
-      that.isOpen = true
       if (e.target.errMsg === 'getUserInfo:ok') {
         wx.getUserInfo({
           success: function (res) {
@@ -136,15 +136,22 @@ export default {
       const that = this
       that.isOpen = false
     },
-
+    trim(s) {
+      return s.replace(/(^\s*)|(\s*$)/g, '')
+    },
     sendMessage() {
-      const that = this
-      const desc = that.desc
+      let that = this
+      const desc = that.trim(that.desc)
+      if (!desc) {
+        that.desc = ''
+        return tools.showToast('说点祝福吧 ^_^')
+      }
+      that.sendMsgLoading = true
       wx.cloud
         .callFunction({
           name: 'secCheck',
           data: {
-            content: [desc]
+            content: desc
           }
         })
         .then(
@@ -168,13 +175,17 @@ export default {
                   that.getMessageList()
                 })
             } else {
-              tools.showToast('说点什么吧~~')
+              tools.showToast('说点祝福吧 ^_^')
             }
           },
-          res => {
-            console.error('fail:', res)
+          err => {
+            tools.showToast('说点祝福吧 ^_^')
+            console.error('err:', err)
           }
         )
+        .finally(() => {
+          that.sendMsgLoading = false
+        })
     },
     deleteMessage(item) {
       const that = this
@@ -420,6 +431,7 @@ export default {
     }
 
     .item {
+      position: relative;
       width: 630rpx;
       margin-left: 30rpx;
       border-radius: 16rpx;
@@ -458,6 +470,10 @@ export default {
             line-height: 50rpx;
             color: #444;
             font-size: 28rpx;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: left;
           }
 
           .top-r {
@@ -476,16 +492,25 @@ export default {
           white-space: pre-wrap;
           width: 450rpx;
         }
+      }
 
-        .delete {
-          display: flex;
-          line-height: 50rpx;
-          width: 48rpx;
+      .delete {
+        position: absolute;
+        display: inline-block;
+        top: 0;
+        right: 0;
+        top: -5px;
+        right: -5px;
+        line-height: 50rpx;
+        width: 50rpx;
 
-          .delete_icon {
-            width: 36rpx;
-            height: 36rpx;
-          }
+        .delete_icon {
+          position: absolute;
+          display: inline-block;
+          width: 30rpx;
+          height: 30rpx;
+          top: 0;
+          right: 0;
         }
       }
     }
@@ -515,8 +540,9 @@ export default {
     .right {
       margin: 0;
     }
+
     .say-button {
-      width: 360rpx;
+      width: 399rpx;
     }
   }
 
@@ -556,12 +582,18 @@ export default {
         line-height: 80rpx;
         font-size: 28rpx;
         flex: 2;
-        color: #fff;
-        background: #ED695D;
         margin: 0 20rpx 0 30rpx;
       }
 
+      .left {
+        color: #fff;
+        background: #ED695D;
+      }
+
       .right {
+        background: #fff;
+        border: 1px solid #ED695D;
+        color: #ED695D;
         flex: 1;
       }
     }
