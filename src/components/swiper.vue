@@ -7,7 +7,7 @@
       @change="change"
       @animationfinish="animationfinish"
       :duration=250
-      :interval=3880
+      :interval=5000
     >
     <block v-for="(item, index) in list" :key="index">
       <swiper-item class="item">

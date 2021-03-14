@@ -2,6 +2,7 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 
 exports.main = async (event, context) => {
+  console.log('[1]secCheck event: ', event)
   try {
     let res = ''
     res = await cloud.openapi.security.msgSecCheck({
@@ -10,10 +11,10 @@ exports.main = async (event, context) => {
     if (res.errCode === '87014') {
       throw new Error('含有违规内容，请重新输入')
     }
-    console.log('secCheck res: ', res)
+    console.log('[1]secCheck res: ', res)
     return res
   } catch (err) {
-    console.log('secCheck err', err)
-    return err
+    console.log('[1]secCheck err', err)
+    throw new Error('含有违规内容，请重新输入')
   }
 }

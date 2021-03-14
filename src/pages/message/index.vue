@@ -12,11 +12,7 @@
           <p class="con">{{ item.desc }}</p>
         </div>
         <div class="delete" @tap="deleteMessage(item)">
-          <image
-            src="../../static/images/delete1.png"
-            class="delete_icon"
-            v-if="isAdmin"
-          />
+          <image src="../../static/images/delete1.png" class="delete_icon" v-if="isAdmin" />
         </div>
       </div>
       <p class="place-end"></p>
@@ -179,8 +175,8 @@ export default {
             }
           },
           err => {
-            tools.showToast('说点祝福吧 ^_^')
             console.error('err:', err)
+            tools.showToast('说点祝福吧 ^_^')
           }
         )
         .finally(() => {
