@@ -80,3 +80,17 @@ music.get().then(res => {
   app.globalData.musics = res.data
   innerAudioContext.src = app.globalData.musics[0].musicUrl
 })
+
+// const banner = db.collection('banner')
+// banner.get().then(res => {
+//   const bannerList = res.data[0].bannerList
+//   let list = []
+//   for (let i = 0; i < bannerList.length; i++) {
+//     let show = i === 0
+//     list.push({
+//       url: bannerList[i],
+//       show: show
+//     })
+//   }
+//   app.globalData.bannerlist = list
+// })
