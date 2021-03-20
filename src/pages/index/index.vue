@@ -18,11 +18,13 @@
 <script>
 import IndexSwiper from 'components/indexSwiper'
 import tools from 'common/js/h_tools'
+import mixin from '../../common/js/mixin'
 export default {
   name: 'Index',
   components: {
     IndexSwiper
   },
+  mixins: [mixin],
   data() {
     return {
       isPlay: false,
@@ -37,6 +39,7 @@ export default {
     this.globalData.innerAudioContext.onEnded(this.onEnded)
     this.globalData.innerAudioContext.onPlay(this.onPlay)
     this.globalData.innerAudioContext.onPause(this.onPause)
+    this.globalData.innerAudioContext.autoplay = true
     this.getList()
     const db = wx.cloud.database()
     const common = db.collection('common')
@@ -46,8 +49,6 @@ export default {
     })
   },
   onShow() {
-    this.audioCtx = this.globalData.innerAudioContext
-    this.audioCtx.autoplay = true
     this.audioPlay()
   },
   methods: {

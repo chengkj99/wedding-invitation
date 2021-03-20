@@ -1,5 +1,7 @@
 <script>
+import mixin from './common/js/mixin'
 export default {
+  mixins: [mixin],
   onLaunch() {
     // 检测小程序是否有新版本更新
     if (wx.canIUse('getUpdateManager')) {
@@ -39,6 +41,12 @@ export default {
         confirmColor: '#5BB53C',
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
+    }
+  },
+  onShow() {
+    if (this.globalData) {
+      console.log('App onShow audioPlay')
+      this.audioPlay()
     }
   },
   onError(err) {

@@ -34,8 +34,7 @@ export default {
     this.globalData.showShareMenu()
   },
   onShow() {
-    const that = this
-    that.getUserList()
+    this.getUserList()
   },
   methods: {
     sendGreet(e) {

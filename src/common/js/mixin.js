@@ -17,6 +17,12 @@ export default {
       setTimeout(() => {
         this.show = true
       }, delay)
+    },
+    audioPlay () {
+      this.audioCtx = this.globalData.innerAudioContext
+      if (this.audioCtx.paused) {
+        this.audioCtx.play()
+      }
     }
   }
 }
