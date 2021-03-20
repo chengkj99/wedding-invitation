@@ -41,11 +41,6 @@ export default {
       })
     }
   },
-  onShow() {
-    if (this.globalData) {
-      this.globalData.innerAudioContext.play()
-    }
-  },
   onError(err) {
     console.log('error', err)
   }

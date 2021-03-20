@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/auth/main",
     "pages/index/main",
     "pages/photo/main",
     "pages/map/main",
@@ -53,5 +54,8 @@
   "requiredBackgroundModes": [
     "audio"
   ],
+  "useExtendedLib": {
+    "weui": true
+  },
   "cloud": true
 }

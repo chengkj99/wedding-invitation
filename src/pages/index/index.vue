@@ -4,11 +4,11 @@
     <div class="bg-swiper">
       <index-swiper :list="list" :info="info"></index-swiper>
     </div>
-    <div @tap="audioPlay" class="bg_music" v-if="isPlay">
+    <div @tap="switchMusic" class="bg_music" v-if="isPlay">
       <image class="musicImg music_icon" src="../../static/images/music_icon.png" />
       <image class="music_play pauseImg" src="../../static/images/music_play.png" />
     </div>
-    <div @tap="audioPlay" class="bg_music" v-else>
+    <div @tap="switchMusic" class="bg_music" v-else>
       <image class="musicImg" src="../../static/images/music_icon.png" />
       <image class="music_play playImg" src="../../static/images/music_play.png" />
     </div>
@@ -47,7 +47,8 @@ export default {
   },
   onShow() {
     this.audioCtx = this.globalData.innerAudioContext
-    this.isPlay = !this.audioCtx.paused
+    this.audioCtx.autoplay = true
+    this.audioPlay()
   },
   methods: {
     onPlay() {
@@ -66,9 +67,19 @@ export default {
     audioPlay() {
       if (this.audioCtx.paused) {
         this.audioCtx.play()
+        this.isPlay = true
+        tools.showToast('背景音乐已开启~')
+      }
+    },
+    switchMusic() {
+      if (this.audioCtx.paused) {
+        this.audioCtx.play()
+        this.isPlay = true
         tools.showToast('背景音乐已开启~')
       } else {
         this.audioCtx.pause()
+        this.isPlay = false
+        console.log('this.audioCtx.paused', this.audioCtx.paused)
         tools.showToast('您已暂停音乐播放~')
       }
     },
