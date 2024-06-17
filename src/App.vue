@@ -44,6 +44,23 @@ export default {
     }
   },
   onShow() {
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.switchTab({ url: '/pages/index/main' })
+        } else {
+          wx.redirectTo({ url: '/pages/auth/main' })
+        }
+      },
+      fail: err => {
+        wx.redirectTo({ url: '/pages/auth/main' })
+        console.log('getSetting err', err)
+      }
+    })
+    // if (+options.scene === 1007 || +options.scene === 1008) {
+    //   // 通过单人聊天会话分享进入
+    //   wx.redirectTo({ url: '/pages/auth/main' })
+    // }
     if (this.globalData) {
       console.log('App onShow audioPlay')
       this.audioPlay()
